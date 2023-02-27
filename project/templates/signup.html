@@ -1,9 +1,33 @@
 <!-- templates/signup.html -->
 
-{% extends "base.html" %}
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %} PiBit {% endblock %}</title>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>PiBit</title>
+    <meta name="keywords" content="Pi Network, PiBit, Pi token, Leen-Co Tech, Leenco, Emlyn, Pi, Pi Exchanger, Pi Exchange,">
+    <meta name="description" content="Buy and Sell Pi Coin, Buy and Sell your Pi,">
+    <meta name="author" content="Umar Abdulmalik, Umar Emlyn, Leen-Co Tech Ltd">
+    <!-- bootstrap css -->
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- style css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- responsive-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 
+</head>
 {% block content %}
-<div class="column is-4 is-offset-4">
+<div class=" ">
     <h3 class="title">Sign Up</h3>
     <div class="box">
         {% with messages = get_flashed_messages() %}
@@ -13,27 +37,50 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form method="POST" action="/signup">
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
+
+        <br>
+            <!-- Signup Form -->
+        <div class="container right-panel-active">
+            <!-- Sign Up -->
+            <div class="container__form container--signup">
+                <form action="/login" method="POST" class="form" id="form1">
+                    <h2 class="form__title">Sign Up</h2>
+                    <input type="text" placeholder="Full Name" class="input" />
+                    <input type="email" placeholder="Email" class="input" />
+                    <input type="password" placeholder="Password" class="input" />
+                    <input type="password" placeholder="Repeat Password" class="input" />
+                    <button type="submit" onclick="submit()" class="btn">Sign Up</button>
+                </form>
+            </div>
+            <!-- Sign In -->
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+          {% endif %}
+            <div class="container__form container--signin">
+                <form class="form" id="form2"  method="POST" action="/login">
+                    <h2 class="form__title">Sign In</h2>
+                    <input type="email" placeholder="Email" class="input" />
+                    <input type="password" id="password" placeholder="Password" class="input" />
+                    <a href="#" class="link">Forgot your password?</a>
+                    <button type="submit" onclick="submit()" class="btn">Sign In</button>
+                </form>
+            </div>
+            <!-- Overlay -->
+            <div class="container__overlay">
+                <div class="overlay">
+                    <div class="overlay__panel overlay--left">
+                    <p>Already have an Account?</p>
+                        <button class="btn" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay__panel overlay--right">
+                    <p>Don't have an Account?</p>
+                        <button class="btn" id="signUp">Sign Up</button>
+                    </div>
                 </div>
             </div>
-
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
-                </div>
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Password">
-                </div>
-            </div>
-
-            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
-        </form>
-    </div>
-</div>
+        </div>
+            <!-- end Signup Form -->
+          
 {% endblock %}
